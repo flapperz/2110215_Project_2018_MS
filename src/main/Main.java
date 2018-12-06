@@ -1,5 +1,6 @@
 package main;
 
+import globalVariable.Scenes;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -8,7 +9,6 @@ import scene.*;
 public class Main extends Application{
 	
 	private static Stage stage;
-	private static Scene scene = new LoadingScene();
 	
 	public static void main(String [] args) {
 		launch(args);
@@ -16,23 +16,29 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		stage = primaryStage;
-		stage.setTitle("Magic Slinger");
-		stage.setScene(scene);
+		setStage(primaryStage);
+		getStage().setTitle("Magic Slinger");
+		getStage().setScene(Scenes.getLoadingScene());
 		
-		stage.show();
+		getStage().show();
+		
 	}
 	
+	@Override
+	public void stop() throws Exception{
+		((LoadingScene)Scenes.getLoadingScene()).getLoadThread().interrupt();
+	}
 
 //Getter-Setter
 
-	public static Scene getScene() {
-		return scene;
+	public static Stage getStage() {
+		return stage;
 	}
 
-	public static void setScene(Scene scene) {
-		Main.scene = scene;
+	public static void setStage(Stage stage) {
+		Main.stage = stage;
 	}
+	
 	
 	
 	
