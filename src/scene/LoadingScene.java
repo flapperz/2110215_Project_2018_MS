@@ -78,7 +78,7 @@ public class LoadingScene extends Scene {
 		ft.setFromValue(1);
 		ft.setToValue(0);
 		ft.setOnFinished(e->{
-			Main.getStage().setScene(Scenes.getStartScene());
+			Scenes.setMainScene(Scenes.getStartScene());
 		});	
 		ft.play();
 	}

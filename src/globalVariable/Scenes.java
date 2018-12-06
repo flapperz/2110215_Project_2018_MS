@@ -1,6 +1,7 @@
 package globalVariable;
 
 import javafx.scene.Scene;
+import main.Main;
 import scene.*;
 
 public class Scenes {
@@ -16,6 +17,10 @@ public class Scenes {
 		gameScene = new GameScene();
 	}
 	
+	public static void setMainScene(Scene scene) {
+		Main.getStage().setScene(scene);
+	}
+	
 	//Scene getter
 
 	public static Scene getLoadingScene() {
@@ -29,5 +34,6 @@ public class Scenes {
 	public static Scene getGameScene() {
 		return gameScene;
 	}
+	
 	
 }
