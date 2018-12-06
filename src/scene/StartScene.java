@@ -14,7 +14,7 @@ import javafx.util.Duration;
 
 public class StartScene extends Scene {
 	
-	private BooleanProperty bool = new SimpleBooleanProperty(false);
+	private int animationFrame;
 	
 	public StartScene() {
 		super(new StackPane(),Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
@@ -32,9 +32,25 @@ public class StartScene extends Scene {
 	
 	
 	private void playBgAnimation(GraphicsContext gc) {
-		System.out.println("draw");
+		animationFrame = 0;
+		
 		Timeline animBg = new Timeline(new KeyFrame(Duration.seconds(1./60),e->{
+			double backPos = (animationFrame*Const.BACK_CITY_SPEED)%1600;
+			double frontPos = (animationFrame*Const.FRONT_CITY_SPEED)%1600;
+			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			
+			gc.drawImage(Sprites.bg_sky[0],200,300,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			
+			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+
 			gc.drawImage(Sprites.bg_train[0],0,0);
+			
+			animationFrame++;
 		}));
 		
 		animBg.setCycleCount(Timeline.INDEFINITE);

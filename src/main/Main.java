@@ -17,10 +17,12 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		setStage(primaryStage);
-		getStage().setTitle("Magic Slinger");
-		getStage().setScene(Scenes.getLoadingScene());
+		stage.setTitle("Magic Slinger");
+		stage.setScene(Scenes.getLoadingScene());
+		stage.setMaximized(true);
 		
-		getStage().show();
+		
+		stage.show();
 		
 	}
 	
