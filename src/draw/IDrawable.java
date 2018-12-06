@@ -1,5 +1,5 @@
 package draw;
 
-public class IDrawable {
+public interface IDrawable {
 
 }
