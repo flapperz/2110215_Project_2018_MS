@@ -12,7 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-public class StartScene extends Scene{
+public class StartScene extends Scene {
 	
 	private BooleanProperty bool = new SimpleBooleanProperty(false);
 	
