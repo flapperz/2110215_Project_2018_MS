@@ -4,9 +4,12 @@ import javafx.scene.Scene;
 import scene.*;
 
 public class Scenes {
+	private static int CurrentScene = Const.SCENE_LOADING;
+	
 	private static Scene loadingScene = new LoadingScene();
 	private static Scene startScene;
 	private static Scene gameScene;
+	
 	
 	public static void loadResource() {
 		startScene = new StartScene();
