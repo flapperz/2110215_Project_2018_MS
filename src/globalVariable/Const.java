@@ -1,10 +1,10 @@
 package globalVariable;
 
 public class Const {
-	public static final int WINDOW_WIDHT = 800;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final int WINDOW_WIDHT = 1200;
+	public static final int WINDOW_HEIGHT = 900;
 	
-	public static final int GROUND_POS = 480;
+	public static final int GROUND_POS = 720;
 	
 
 	public static final double FRONT_CITY_SPEED = 20;

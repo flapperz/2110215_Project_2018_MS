@@ -1,16 +1,18 @@
 package scene;
 
 import globalVariable.Const;
-import globalVariable.Scenes;
 import globalVariable.Sounds;
 import globalVariable.Sprites;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,7 +22,7 @@ import main.Main;
 
 public class LoadingScene extends Scene {
 	
-	private StackPane root;
+	private Pane root;
 	private Canvas canvas;
 	private Thread loadThread;
 	
@@ -29,11 +31,12 @@ public class LoadingScene extends Scene {
 	private boolean animFinished = false;
 	
 	public LoadingScene() {
-		super(new StackPane(), Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
-		root = (StackPane)getRoot();
+		super(new Pane());
+		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #FFFFFF;");
+		root.setPadding(new Insets(0));
 		
-		Canvas canvas = new Canvas(Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+		Canvas canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		root.getChildren().add(canvas);
@@ -89,14 +92,12 @@ public class LoadingScene extends Scene {
 			animationFrame ++;
 			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
 			if(animationFrame <= 120) {
-				gc.setFill(Color.color(0,0,0,animationFrame/120.));
-				gc.setFont(new Font(72));
-				gc.setTextAlign(TextAlignment.CENTER);
-				gc.fillText("GANG ROCKET",400,300);
+				gc.setGlobalAlpha(animationFrame/120.);
+				gc.drawImage(Sprites.loading_banner[0], 300, 300);
 			}
 			else {
-				gc.setFill(Color.color(0,0,0,1));
-				gc.fillText("GANG ROCKET",400,300);
+				gc.setGlobalAlpha(1);
+				gc.drawImage(Sprites.loading_banner[0], 300, 300);
 			}
 			//TODO enhance loading
 			

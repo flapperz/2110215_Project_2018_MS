@@ -1,4 +1,4 @@
-package globalVariable;
+package scene;
 
 import javafx.scene.Scene;
 import main.Main;

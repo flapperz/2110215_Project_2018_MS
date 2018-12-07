@@ -1,8 +1,6 @@
 package main;
 
-import globalVariable.Scenes;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import scene.*;
 
@@ -19,7 +17,7 @@ public class Main extends Application{
 		setStage(primaryStage);
 		stage.setTitle("Magic Slinger");
 		stage.setScene(Scenes.getLoadingScene());
-		stage.setResizable(false);
+		//stage.setResizable(false);
 		
 		stage.show();
 		

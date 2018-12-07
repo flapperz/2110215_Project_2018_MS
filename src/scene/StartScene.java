@@ -1,6 +1,7 @@
 package scene;
 
 
+
 import globalVariable.Const;
 import globalVariable.Sprites;
 import javafx.animation.KeyFrame;
@@ -8,21 +9,24 @@ import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class StartScene extends Scene {
 	
-	private StackPane root;
+	private Pane root;
 	private Canvas canvas;
+	private ImageView nameBanner;
+	private ImageView startBtn;
 	
 	private Timeline animBg;
 	private int frame;
 	private double backPos;
 	private double frontPos;
-	private double bumpFac;
 	
 	private Timeline animStart;
 	private double playerY;
@@ -31,20 +35,26 @@ public class StartScene extends Scene {
 	private final int CUTSCENE = 1;
 	private int state = NORMAL;
 	
-	private boolean isOnStart;
-	
 	
 	public StartScene() {
-		super(new StackPane(),Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
-		root = (StackPane)getRoot();
+		super(new Pane());
+		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #000000;");
 		
 		canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
-		root.getChildren().add(canvas);
+		nameBanner = new ImageView(Sprites.ui_nameBanner[0]);
+		nameBanner.setX(120);
+		nameBanner.setY(300);
 		
-		addCanvasEventHandler(canvas);
+		startBtn = new ImageView(Sprites.ui_start[0]);
+		startBtn.setX(800);
+		startBtn.setY(500);
+		
+		root.getChildren().addAll(canvas,nameBanner,startBtn);
+		
+		addStartEventHandler();
 		playBgAnimation(gc);
 	
 	}
@@ -54,27 +64,25 @@ public class StartScene extends Scene {
 		frame = 0;
 		
 		animBg = new Timeline(new KeyFrame(Duration.seconds(1./60),e->{
-			backPos = (frame*Const.BACK_CITY_SPEED)%1600;
-			frontPos = (frame*Const.FRONT_CITY_SPEED)%1600;
-			if(frame%200 > 100) bumpFac = (frame%200)/10.;
-			else bumpFac = (200-frame%200)/10.;
+			backPos = (frame*Const.BACK_CITY_SPEED)%3600;
+			frontPos = (frame*Const.FRONT_CITY_SPEED)%3600;
 			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_sky[0],200,300,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_backCity[0],backPos,bumpFac*0.2,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_frontCity[0],frontPos,bumpFac,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
 			gc.drawImage(Sprites.bg_train[0],0,0);
 			
-			gc.drawImage(Sprites.ui_nameBanner[0], 100, 100);
+			//gc.drawImage(Sprites.ui_nameBanner[0], 100, 100);
 			
 			
-			gc.drawImage((isOnStart) ? Sprites.ui_start[0]:Sprites.ui_startHighlighted[0], 180, 336);
+			//gc.drawImage((isOnStart) ? Sprites.ui_start[0]:Sprites.ui_startH[0], 180, 336);
 			frame++;
 		}));
 		
@@ -92,10 +100,10 @@ public class StartScene extends Scene {
 			gc.drawImage(Sprites.bg_sky[0],200,300,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_backCity[0],backPos,bumpFac*0.2,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_frontCity[0],frontPos,bumpFac,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
 			gc.drawImage(Sprites.bg_train[0],0,0);
@@ -112,22 +120,22 @@ public class StartScene extends Scene {
 		animStart.play();
 	}
 	
-	private boolean isOnStartButton(MouseEvent event) {
-		return event.getX() >= 180 && event.getX() < 478 && event.getY() >= 336 && event.getY() < 439;
-	}
-	
-	private void addCanvasEventHandler(Canvas canvas) {
-		canvas.setOnMouseMoved(e -> {
-			if (isOnStartButton(e)) {
-				isOnStart = true;
-			}
-			else {
-				isOnStart = false;
+	private void addStartEventHandler() {
+		startBtn.setOnMouseEntered(e -> {
+			if (state == NORMAL) {
+				startBtn.setImage(Sprites.ui_startH[0]);
 			}
 		});
-		canvas.setOnMouseClicked(e -> {
-			if (isOnStartButton(e) && state == NORMAL) {
+		startBtn.setOnMouseExited(e -> {
+			if (state == NORMAL) {
+				startBtn.setImage(Sprites.ui_start[0]);
+			}			
+		});
+		startBtn.setOnMouseClicked(e -> {
+			if (state == NORMAL) {
 				state = CUTSCENE;
+				startBtn.setVisible(false);
+				nameBanner.setVisible(false);
 				animBg.stop();
 				playStartAnimation((GraphicsContext)canvas.getGraphicsContext2D());
 			}

@@ -4,9 +4,11 @@ import javafx.scene.image.Image;
 
 public class Sprites {
 	
+	public static final Image[]	loading_banner = {new Image(ClassLoader.getSystemResource("images/loading/banner.png").toString())};
+	
 	public static final Image[] ui_nameBanner = new Image[1];
 	public static final Image[] ui_start = new Image[1];
-	public static final Image[] ui_startHighlighted = new Image[1];
+	public static final Image[] ui_startH = new Image[1];
 	
 	public static final Image[] bg_sky = new Image[1];
 	public static final Image[] bg_backCity = new Image[1];
@@ -16,9 +18,10 @@ public class Sprites {
 	public static final Image[] p_jumpR = new Image[1];
 	
 	public static void loadResource() {
+		
 		ui_nameBanner[0] = new Image(ClassLoader.getSystemResource("images/ui/nameBanner.png").toString());
 		ui_start[0] = new Image(ClassLoader.getSystemResource("images/ui/start.png").toString());
-		ui_startHighlighted[0] = new Image(ClassLoader.getSystemResource("images/ui/startHighlighted.png").toString());
+		ui_startH[0] = new Image(ClassLoader.getSystemResource("images/ui/startH.png").toString());
 		
 		bg_sky[0] = new Image(ClassLoader.getSystemResource("images/bg/sky.png").toString());
 		bg_backCity[0] = new Image(ClassLoader.getSystemResource("images/bg/backCity.png").toString());
