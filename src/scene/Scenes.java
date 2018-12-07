@@ -1,8 +1,6 @@
 package scene;
 
 import javafx.scene.Scene;
-import main.Main;
-import scene.*;
 
 public class Scenes {
 	

@@ -10,10 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class StartScene extends Scene {
@@ -24,12 +22,15 @@ public class StartScene extends Scene {
 	private ImageView startBtn;
 	
 	private Timeline animBg;
-	private int frame;
+	private int bgFrame;
 	private double backPos;
 	private double frontPos;
 	
-	private Timeline animStart;
-	private double playerY;
+	private Timeline animFade;
+	private int fadeFrame;
+	
+	private Timeline animDrop;
+	private int dropFrame;
 	
 	private final int NORMAL = 0;
 	private final int CUTSCENE = 1;
@@ -61,11 +62,11 @@ public class StartScene extends Scene {
 	
 	
 	private void playBgAnimation(GraphicsContext gc) {
-		frame = 0;
+		bgFrame = 0;
 		
 		animBg = new Timeline(new KeyFrame(Duration.seconds(1./60),e->{
-			backPos = (frame*Const.BACK_CITY_SPEED)%3600;
-			frontPos = (frame*Const.FRONT_CITY_SPEED)%3600;
+			backPos = (bgFrame*Const.BACK_CITY_SPEED)%3600;
+			frontPos = (bgFrame*Const.FRONT_CITY_SPEED)%3600;
 			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
 			
 			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
@@ -79,11 +80,7 @@ public class StartScene extends Scene {
 
 			gc.drawImage(Sprites.bg_train[0],0,0);
 			
-			//gc.drawImage(Sprites.ui_nameBanner[0], 100, 100);
-			
-			
-			//gc.drawImage((isOnStart) ? Sprites.ui_start[0]:Sprites.ui_startH[0], 180, 336);
-			frame++;
+			bgFrame++;
 		}));
 		
 		animBg.setCycleCount(Timeline.INDEFINITE);
@@ -92,32 +89,48 @@ public class StartScene extends Scene {
 	}
 	
 	private void playStartAnimation(GraphicsContext gc) {
-		frame = 0;
-		animStart = new Timeline(new KeyFrame(Duration.seconds(1/60.),e->{
-			playerY = frame*20;
+		fadeFrame = 0;
+		
+		animFade = new Timeline(new KeyFrame(Duration.seconds(1/60.),e->{
+			backPos = (bgFrame*Const.BACK_CITY_SPEED)%3600;
+			frontPos = (bgFrame*Const.FRONT_CITY_SPEED)%3600;
+			
 			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_sky[0],200,300,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 			
 			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_frontCity[0],frontPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
 					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 
 			gc.drawImage(Sprites.bg_train[0],0,0);
 
-			gc.setGlobalAlpha(0.6);
+			gc.setGlobalAlpha(1/30.*fadeFrame);
 			gc.setFill(Color.BLACK);
 			gc.fillRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
-			
 			gc.setGlobalAlpha(1);
-			gc.drawImage(Sprites.p_jumpR[0], 400, playerY);
-			frame++;
+			fadeFrame++;
+			bgFrame++;
 		}));
-		animStart.setCycleCount(20);
-		animStart.play();
+		animFade.setCycleCount(30);
+		animFade.play();
+		animFade.setOnFinished(e ->{ 
+			animDrop.play();
+		});
+		dropFrame = 0;
+		animDrop = new Timeline(new KeyFrame(Duration.seconds(1/60.),e -> {
+			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.setFill(Color.BLACK);
+			gc.fillRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.p_jumpR[0], 600-46, (1.8*(Math.pow(dropFrame,2.0))-180));
+			dropFrame++;
+		}));
+		animDrop.setCycleCount(21);
+		animDrop.setOnFinished(e ->{ 
+		});
 	}
 	
 	private void addStartEventHandler() {

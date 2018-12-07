@@ -6,17 +6,11 @@ import globalVariable.Sprites;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import main.Main;
 
@@ -36,7 +30,7 @@ public class LoadingScene extends Scene {
 		root.setStyle("-fx-background-color: #FFFFFF;");
 		root.setPadding(new Insets(0));
 		
-		Canvas canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+		canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		root.getChildren().add(canvas);
