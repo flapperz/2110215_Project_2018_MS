@@ -21,6 +21,7 @@ import main.Main;
 public class LoadingScene extends Scene {
 	
 	private StackPane root;
+	private Canvas canvas;
 	private Thread loadThread;
 	
 

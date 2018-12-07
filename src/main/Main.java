@@ -19,8 +19,7 @@ public class Main extends Application{
 		setStage(primaryStage);
 		stage.setTitle("Magic Slinger");
 		stage.setScene(Scenes.getLoadingScene());
-		stage.setMaximized(true);
-		
+		stage.setResizable(false);
 		
 		stage.show();
 		
