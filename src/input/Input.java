@@ -53,9 +53,10 @@ public class Input {
 			if (b == MouseButton.PRIMARY) {
 				leftMouseActive = true;
 				leftMouseTrigger = true;
-			} else if (b == MouseButton.SECONDARY) {
+			}
+			if (b == MouseButton.SECONDARY) {
 				rightMouseActive = true;
-				rightMouseActive = true;
+				rightMouseTrigger = true;
 			}
 		});
 		scene.setOnMouseReleased(e -> {
@@ -63,9 +64,10 @@ public class Input {
 			if (b == MouseButton.PRIMARY) {
 				leftMouseActive = false;
 				leftMouseTrigger = false;
-			} else if (b == MouseButton.SECONDARY) {
+			}
+			if (b == MouseButton.SECONDARY) {
 				rightMouseActive = false;
-				rightMouseActive = false;
+				rightMouseTrigger = false;
 			}
 		});
 	}
@@ -83,15 +85,15 @@ public class Input {
 			return triggerKeys.remove(code);
 	}
 	
-	public boolean isLeftMouseActive() {
+	public static boolean isLeftMouseActive() {
 		return leftMouseActive;
 	}
 	
-	public boolean isRightMouseActive() {
+	public static boolean isRightMouseActive() {
 		return rightMouseActive;
 	}
 	
-	public boolean isLeftMouseTrigger() {
+	public static boolean isLeftMouseTrigger() {
 		try{
 			return leftMouseTrigger;
 		} finally {
@@ -99,7 +101,7 @@ public class Input {
 		}
 	}
 	
-	public boolean isRightMouseTrigger() {
+	public static boolean isRightMouseTrigger() {
 		try {
 			return rightMouseTrigger;			
 		} finally {
@@ -108,11 +110,11 @@ public class Input {
 		
 	}
 	
-	public double getMouseX() {
+	public static double getMouseX() {
 		return mouseX;
 	}
 	
-	public double getMouseY() {
+	public static double getMouseY() {
 		return mouseY;
 	}
 

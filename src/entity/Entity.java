@@ -16,6 +16,8 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	protected final Sprite sprite = new Sprite();
 	protected double speedX;
 	protected double speedY;
+	protected double destinationX;
+	protected double destinationY;
 	protected int facing;
 	protected boolean visible;
 	
@@ -26,6 +28,8 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.sprite.setSprite(images);
 		this.speedX = 0;
 		this.speedY = 0;
+		this.destinationX = x;
+		this.destinationY = y;
 		this.facing = RIGHT;
 		this.visible = true;
 	}
@@ -35,31 +39,49 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.sprite.setSprite(images);
 		this.speedX = 0;
 		this.speedY = 0;
+		this.destinationX = x;
+		this.destinationY = y;
 		this.facing = RIGHT;
 		this.visible = true;
 	}
-
 	
-	public void move(double x, double y) {
-		this.x += x;
-		this.y += y;
-	}
-	
-	public void move() {
-		this.x += speedX;
-		this.y += speedY;
+	public Entity() {
+		super();
+		this.speedX = 0;
+		this.speedY = 0;
+		this.destinationX = x;
+		this.destinationY = y;
+		this.facing = RIGHT;
+		this.visible = true;
 	}
 	
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(sprite.getImage(),x-View.getInstance().getX(),y-View.getInstance().getY());
+		gc.drawImage(sprite.getImage(),x - View.getInstance().getX() - sprite.getImage().getWidth()/2,
+				y - View.getInstance().getY() - sprite.getImage().getHeight()/2);
 		sprite.animate();
 	}
-
-	@Override
-	public boolean isVisible() {
-		return visible;
+	
+	protected void move() {
+		if(x < destinationX-speedX) {
+			x += speedX;
+		}else if(x > destinationX+speedX) {
+			x -= speedX;
+		}else {
+			x = destinationX;
+		}
+		if(y < destinationY-speedY) {
+			y += speedY;
+		}else if(y > destinationY+speedY) {
+			y -= speedY;
+		}else {
+			y = destinationY;
+		}	
 	}
 	
+	public void create() {
+		SharedEntity.getInstance().add(this);
+	}
+
 	public void destroy() {
 		onDestroy();
 		SharedEntity.getInstance().remove(this);
@@ -67,6 +89,11 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	
 	public abstract void onDestroy();
 	
+	
+	@Override
+	public boolean isVisible() {
+		return visible;
+	}
 	
 	
 }

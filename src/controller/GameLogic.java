@@ -1,15 +1,15 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import constants.Const;
+
 import entity.Entity;
-import entity.player.Player;
+import entity.monster.Monster;
+import entity.particle.Particle;
+import entity.projectile.Projectile;
 import javafx.scene.canvas.GraphicsContext;
 import map.BackGround;
-import resource.Sprites;
 
 public class GameLogic {
 	
@@ -20,13 +20,16 @@ public class GameLogic {
 	
 	private GameLogic() {
 		bg = new BackGround();
+		
 	}
 
 	
 	public void mainUpdate(GraphicsContext gc) {
 		bg.update();
-		SharedEntity.getInstance().getPlayer().update();
 		View.getInstance().update();
+		for (Entity e: SharedEntity.getInstance().getEntities()) {
+			e.update();
+		}
 		
 		draw(gc);
 		frame++;
@@ -42,8 +45,10 @@ public class GameLogic {
 		
 		bg.draw(gc);
 		
-		for(IDrawable element : drawList) {
-			element.draw(gc);
+		for (IDrawable element : drawList) {
+			if (element.isVisible()) {
+				element.draw(gc);
+			}
 		}
 	}
 	

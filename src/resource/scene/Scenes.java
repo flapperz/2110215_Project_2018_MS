@@ -1,4 +1,4 @@
-package scene;
+package resource.scene;
 
 import javafx.scene.Scene;
 

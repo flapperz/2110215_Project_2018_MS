@@ -21,8 +21,8 @@ public class View extends Rectangle implements IUpdatable{
 	public void update() {
 		x = SharedEntity.getInstance().getPlayer().getX() - 600 + 46; 
 		y = SharedEntity.getInstance().getPlayer().getY() - 450 + 90;
-		if(x < 0) { x = 0; } 
-		else if(x > 1200) { x = 1200; }
+		if (x < 0) { x = 0; } 
+		else if (x > 1200) { x = 1200; }
 		
 		if(y > 0) { y = 0; }		
 	}

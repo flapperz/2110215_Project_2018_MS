@@ -1,4 +1,4 @@
-package scene;
+package resource.scene;
 
 
 
@@ -130,16 +130,18 @@ public class StartScene extends Scene {
 		});
 		dropFrame = 0;
 		animDrop = new Timeline(new KeyFrame(Duration.seconds(1/60.),e -> {
-			gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-			gc.setFill(Color.BLACK);
-			gc.fillRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-			gc.drawImage(Sprites.p_jumpR[0], 600-46, (1.8*(Math.pow(dropFrame,2.0))-180));
-	
+			if(dropFrame < 23) {
+				gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
+				gc.setFill(Color.BLACK);
+				gc.fillRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
+				gc.drawImage(Sprites.p_jumpR[0], 600-46, (1.8*(Math.pow(dropFrame,2.0))-180));
+			}
 			dropFrame++;
 		}));
 		animDrop.setCycleCount(21);
 		animDrop.setOnFinished(e ->{ 
 			Main.getStage().setScene(Scenes.getGameScene());
+			((GameScene)Scenes.getGameScene()).playMainTimeline();
 		});
 	}
 	

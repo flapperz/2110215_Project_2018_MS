@@ -6,8 +6,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import constants.Const;
 import entity.Entity;
-import entity.Monster;
+import entity.monster.Monster;
+import entity.particle.Particle;
 import entity.player.Player;
+import entity.player.Weapon;
+import entity.projectile.Projectile;
 
 public class SharedEntity {
 	
@@ -15,10 +18,27 @@ public class SharedEntity {
 	
 	private List<Entity> entities = new CopyOnWriteArrayList<>();
 	private Player player = new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180);
+	private Weapon weapon = new Weapon();
 	
 	private SharedEntity() {
 		entities.add(player);
+		entities.add(new Weapon());
 	}
+	
+	public void add(Entity e) {
+		entities.add(e);
+		
+	}
+	
+	public void remove(Entity e) {
+		entities.remove(e);
+	}
+	
+	public void clear() {
+		entities.clear();
+	}
+	
+	//Getter
 	
 	public List<IDrawable> getDrawable() {
 		List<IDrawable> list = new ArrayList<>();
@@ -36,6 +56,26 @@ public class SharedEntity {
 		return list;
 	}
 	
+	public List<Particle> getParticles() {
+		List<Particle> list = new ArrayList<>();
+		for (Entity e: entities) {
+			if (e instanceof Particle) {
+				list.add((Particle) e);
+			}
+		}
+		return list;
+	}
+	
+	public List<Projectile> getProjectiles() {
+		List<Projectile> list = new ArrayList<>();
+		for (Entity e: entities) {
+			if (e instanceof Projectile) {
+				list.add((Projectile) e);
+			}
+		}
+		return list;
+	}
+	
 	public List<Monster> getMonsters() {
 		List<Monster> list = new ArrayList<>();
 		for (Entity e: entities) {
@@ -46,26 +86,16 @@ public class SharedEntity {
 		return list;
 	}
 	
-	
-	public void add(Entity e) {
-		entities.add(e);
-		
-	}
-	
-	public void remove(Entity e) {
-		entities.remove(e);
-	}
-	
-	public void clear() {
-		entities.clear();
-	}
-	
 	public static SharedEntity getInstance() {
 		return instance;
 	}
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public Weapon getWeapon() {
+		return weapon;
 	}
 
 	public void setPlayer(Player player) {

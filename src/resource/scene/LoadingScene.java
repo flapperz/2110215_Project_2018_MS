@@ -1,4 +1,4 @@
-package scene;
+package resource.scene;
 
 import constants.Const;
 import javafx.animation.FadeTransition;

@@ -1,8 +1,9 @@
-package scene;
+package resource.scene;
 
 import constants.Const;
 import controller.GameLogic;
 import input.Input;
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -18,21 +19,18 @@ public class GameScene extends Scene {
 	
 	private Timeline tl;
 	private Timeline introAnim;
-	private int introFrame;
 	
 	public GameScene() {
 		super(new Pane());
 		root = (Pane)getRoot();
-		root.setStyle("-fx-background-color: #000000;");
+		root.setStyle("-fx-background-color: #FFFFFF;");
 		canvas = new Canvas(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 		root.getChildren().add(canvas);
 		
 		Input.bindScene(this);
 		
 		addMainTimeline(canvas.getGraphicsContext2D());
-		
-		playMainTimeline();
-		
+				
 	}
 	
 	private void addMainTimeline(GraphicsContext gc) {
@@ -42,15 +40,19 @@ public class GameScene extends Scene {
 		tl.setCycleCount(Timeline.INDEFINITE);
 	}
 	
-	private void playMainTimeline() {
+	public void playMainTimeline() {
 		tl.play();
+		FadeTransition ft = new FadeTransition(Duration.seconds(0.5),canvas);
+		ft.setFromValue(0);
+		ft.setToValue(1);
+		ft.play();
 	}
 	
-	private void pauseMainTimeline() {
+	public void pauseMainTimeline() {
 		tl.pause();
 	}
 	
-	private void stopMainTimeline() {
+	public void stopMainTimeline() {
 		tl.stop();
 	}
 	
