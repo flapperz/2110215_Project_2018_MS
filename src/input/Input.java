@@ -12,7 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
-public class Inputs {
+public class Input {
 	private static Set<KeyCode> activeKeys = new HashSet<>();
 	private static Set<KeyCode> triggerKeys = new HashSet<>();
 

@@ -6,28 +6,29 @@ import java.util.List;
 
 import constants.Const;
 import entity.Entity;
-import entity.PlaceHoldEnt;
 import entity.player.Player;
-import gui.BackGround;
 import javafx.scene.canvas.GraphicsContext;
+import map.BackGround;
 import resource.Sprites;
 
 public class GameLogic {
 	
 	private static final GameLogic instance = new GameLogic();
 	private int frame;
+	
 	private BackGround bg;
 	
 	private GameLogic() {
-		create(new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180));
 		bg = new BackGround();
 	}
 
 	
 	public void mainUpdate(GraphicsContext gc) {
 		bg.update();
-		draw(gc);
+		SharedEntity.getInstance().getPlayer().update();
+		View.getInstance().update();
 		
+		draw(gc);
 		frame++;
 	}
 	
@@ -50,15 +51,17 @@ public class GameLogic {
 		SharedEntity.getInstance().add(e);
 	}
 	
+	//getGameL
+	
 	public static GameLogic getInstance() {
 		return instance;
 	}
 
-
 	public int getFrame() {
 		return frame;
 	}
-	
+
+
 	
 	
 }

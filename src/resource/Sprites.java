@@ -33,7 +33,6 @@ public class Sprites {
 	
 			
 	public static void loadResource() {
-		
 		ui_nameBanner[0] = new Image(ClassLoader.getSystemResource("images/ui/nameBanner.png").toString());
 		ui_start[0] = new Image(ClassLoader.getSystemResource("images/ui/start.png").toString());
 		ui_startH[0] = new Image(ClassLoader.getSystemResource("images/ui/startH.png").toString());
@@ -45,14 +44,13 @@ public class Sprites {
 		
 		p_jumpL[0] = new Image(ClassLoader.getSystemResource("images/player/jumpL.png").toString());
 		p_jumpR[0] = new Image(ClassLoader.getSystemResource("images/player/jumpR.png").toString());
-		p_idleL[0] = new Image(ClassLoader.getSystemResource("images/player/idleR.png").toString());
+		p_idleL[0] = new Image(ClassLoader.getSystemResource("images/player/idleL.png").toString());
 		p_idleR[0] = new Image(ClassLoader.getSystemResource("images/player/idleR.png").toString());
 		p_weapon[0] = new Image(ClassLoader.getSystemResource("images/placeHold.png").toString());
 		
 		fx_bullet[0] = new Image(ClassLoader.getSystemResource("images/fx/bullet.png").toString());
 		fx_jump[0] = new Image(ClassLoader.getSystemResource("images/fx/jumpFx.png").toString());
 		fx_hit[0] = new Image(ClassLoader.getSystemResource("images/fx/hitFx.png").toString());
-		
 		
 		for (int i=0; i<6; i++) {
 			p_walkL[i] = new Image(ClassLoader.getSystemResource("images/player/left"+(i+1)+".png").toString());

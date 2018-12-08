@@ -11,6 +11,7 @@ public class Const {
 
 	public static final double FRONT_CITY_SPEED = 20;
 	public static final double BACK_CITY_SPEED = 2;
+	public static final double STAGE_WIDTH = 2400;
 	
 	
 	

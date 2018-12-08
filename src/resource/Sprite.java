@@ -10,7 +10,7 @@ public class Sprite {
 	public Sprite() {
 		this.sprite = new Image[1];
 		this.frame = 0;
-		this.speed = 0;
+		this.speed = 1;
 	}
 	
 	public Sprite(Image[] image) {
@@ -31,7 +31,12 @@ public class Sprite {
 	
 	//Getter-Setter
 	public Image getImage() {
-		return sprite[(int)frame];
+		try{
+			return sprite[(int)frame];
+		}catch(ArrayIndexOutOfBoundsException e) {
+			frame = 0;
+			return sprite[(int)frame];
+		}
 	}
 	
 	public Image[] getSprite() {
@@ -39,6 +44,7 @@ public class Sprite {
 	}
 
 	public void setSprite(Image[] images) {
+		frame = frame%sprite.length;
 		this.sprite = images;
 	}
 

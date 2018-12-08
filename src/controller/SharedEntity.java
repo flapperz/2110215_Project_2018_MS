@@ -1,18 +1,24 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import constants.Const;
 import entity.Entity;
 import entity.Monster;
+import entity.player.Player;
 
 public class SharedEntity {
 	
 	private static final SharedEntity instance = new SharedEntity();
 	
 	private List<Entity> entities = new CopyOnWriteArrayList<>();
+	private Player player = new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180);
+	
+	private SharedEntity() {
+		entities.add(player);
+	}
 	
 	public List<IDrawable> getDrawable() {
 		List<IDrawable> list = new ArrayList<>();
@@ -56,5 +62,13 @@ public class SharedEntity {
 	
 	public static SharedEntity getInstance() {
 		return instance;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }

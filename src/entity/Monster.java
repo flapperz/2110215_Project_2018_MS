@@ -2,7 +2,7 @@ package entity;
 
 import javafx.scene.image.Image;
 
-public class Monster extends Entity{
+public abstract class Monster extends Entity implements IAttackable{
 
 	public Monster(Image[] images, double x, double y, double width, double height) {
 		super(images, x, y, width, height);
@@ -10,8 +10,11 @@ public class Monster extends Entity{
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public int getZ() {
+		return 0;
 	}
 
 

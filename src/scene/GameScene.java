@@ -2,7 +2,7 @@ package scene;
 
 import constants.Const;
 import controller.GameLogic;
-import input.Inputs;
+import input.Input;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -27,7 +27,7 @@ public class GameScene extends Scene {
 		canvas = new Canvas(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 		root.getChildren().add(canvas);
 		
-		Inputs.bindScene(this);
+		Input.bindScene(this);
 		
 		addMainTimeline(canvas.getGraphicsContext2D());
 		

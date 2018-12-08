@@ -1,4 +1,4 @@
-package gui;
+package map;
 
 import constants.Const;
 import controller.GameLogic;
@@ -21,7 +21,6 @@ public class BackGround implements IDrawable,IUpdatable{
 	
 	@Override
 	public void update() {
-		System.out.println(backPos);
 		backPos = (GameLogic.getInstance().getFrame()*Const.BACK_CITY_SPEED)%3600;
 		frontPos = (GameLogic.getInstance().getFrame()*Const.FRONT_CITY_SPEED)%3600;
 	}
@@ -31,15 +30,15 @@ public class BackGround implements IDrawable,IUpdatable{
 		gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 		
 		gc.drawImage(Sprites.bg_sky[0],
-				-View.getInstance().getX(),-View.getInstance().getY(),Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
+				-300,-450);
 		
-		gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
-				-View.getInstance().getX(),-View.getInstance().getY(),Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
+		gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.STAGE_WIDTH,Const.WINDOW_HEIGHT,
+				-View.getInstance().getX(),-View.getInstance().getY(),Const.STAGE_WIDTH,Const.WINDOW_HEIGHT);
 
-		gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
-				-View.getInstance().getX(),-View.getInstance().getY(),Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
+		gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.STAGE_WIDTH,Const.WINDOW_HEIGHT,
+				-View.getInstance().getX(),-View.getInstance().getY(),Const.STAGE_WIDTH,Const.WINDOW_HEIGHT);
 
-		gc.drawImage(Sprites.bg_train[0],600,0,1200,900,-View.getInstance().getX(),-View.getInstance().getY(),1200,900);
+		gc.drawImage(Sprites.bg_train[0],0,0,Const.STAGE_WIDTH,900,-View.getInstance().getX(),-View.getInstance().getY(),Const.STAGE_WIDTH,Const.WINDOW_HEIGHT);
 	}
 
 	@Override

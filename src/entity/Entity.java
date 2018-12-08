@@ -2,6 +2,7 @@ package entity;
 
 import controller.IDrawable;
 import controller.IUpdatable;
+import controller.SharedEntity;
 import controller.View;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -10,11 +11,12 @@ import resource.Sprite;
 public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	
 	public static final int LEFT = -1;
-	public static final int RIGHT = -1;
+	public static final int RIGHT = 1;
 	
 	protected final Sprite sprite = new Sprite();
 	protected double speedX;
 	protected double speedY;
+	protected int facing;
 	protected boolean visible;
 	
 	
@@ -24,6 +26,7 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.sprite.setSprite(images);
 		this.speedX = 0;
 		this.speedY = 0;
+		this.facing = RIGHT;
 		this.visible = true;
 	}
 
@@ -32,6 +35,7 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.sprite.setSprite(images);
 		this.speedX = 0;
 		this.speedY = 0;
+		this.facing = RIGHT;
 		this.visible = true;
 	}
 
@@ -46,9 +50,9 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.y += speedY;
 	}
 	
-	
 	public void draw(GraphicsContext gc) {
 		gc.drawImage(sprite.getImage(),x-View.getInstance().getX(),y-View.getInstance().getY());
+		sprite.animate();
 	}
 
 	@Override
@@ -56,7 +60,12 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		return visible;
 	}
 	
+	public void destroy() {
+		onDestroy();
+		SharedEntity.getInstance().remove(this);
+	}
 	
+	public abstract void onDestroy();
 	
 	
 	

@@ -4,8 +4,6 @@ public abstract class Rectangle {
 	
 	protected double x;
 	protected double y;
-	protected double cx;
-	protected double cy;
 	protected double width;
 	protected double height;
 	
@@ -18,8 +16,6 @@ public abstract class Rectangle {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.cx = x + width/2;
-		this.cy = y + width/2;
 	}
 	
 	public boolean isCollideWith(Rectangle b) {
@@ -40,7 +36,6 @@ public abstract class Rectangle {
 
 	public void setWidth(double widht) {
 		this.width = widht;
-		cx = x+widht/2;
 	}
 
 	public double getHeight() {
@@ -49,7 +44,6 @@ public abstract class Rectangle {
 
 	public void setHeight(double height) {
 		this.height = height;
-		cy = y + height/2;
 	}
 
 	public double getX() {
@@ -67,29 +61,7 @@ public abstract class Rectangle {
 	public void setY(double y) {
 		this.y = y;
 	}
-
-	public double getCx() {
-		return cx;
-	}
-
-	public void setCx(double cx) {
-		this.cx = cx;
-		x = cx - width/2;
-	}
-
-	public double getCy() {
-		return cy;
-	}
-
-	public void setCy(double cy) {
-		this.cy = cy;
-		y = cy - width/2;
-	}
-	
-	
-	
-	
-	
+		
 	
 
 }
