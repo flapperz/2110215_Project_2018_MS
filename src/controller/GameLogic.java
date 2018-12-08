@@ -4,24 +4,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import entity.Entity;
 import entity.PlaceHoldEnt;
+import entity.player.Player;
+import gui.BackGround;
 import javafx.scene.canvas.GraphicsContext;
 import resource.Sprites;
 
 public class GameLogic {
 	
 	private static final GameLogic instance = new GameLogic();
-	
+	private int frame;
+	private BackGround bg;
 	
 	private GameLogic() {
+		create(new Player(1200-46,720-180));
+		bg = new BackGround();
 	}
 
-	public static GameLogic getInstance() {
-		return instance;
-	}
 	
-	public void update() {
+	public void mainUpdate(GraphicsContext gc) {
+		bg.update();
+		draw(gc);
 		
+		frame++;
 	}
 	
 	public void draw(GraphicsContext gc) {
@@ -31,11 +37,27 @@ public class GameLogic {
 				return 1;
 			return -1;
 		});
+		
+		bg.draw(gc);
+		
 		for(IDrawable element : drawList) {
 			element.draw(gc);
 		}
-		
 	}
+	
+	public void create(Entity e) {
+		SharedEntity.getInstance().add(e);
+	}
+	
+	public static GameLogic getInstance() {
+		return instance;
+	}
+
+
+	public int getFrame() {
+		return frame;
+	}
+	
 	
 	
 }

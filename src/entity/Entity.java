@@ -1,12 +1,13 @@
 package entity;
 
 import controller.IDrawable;
+import controller.IUpdatable;
 import controller.View;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import resource.Sprite;
 
-public abstract class Entity extends Rectangle implements IDrawable{
+public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	
 	public static final int LEFT = -1;
 	public static final int RIGHT = -1;
@@ -26,7 +27,6 @@ public abstract class Entity extends Rectangle implements IDrawable{
 		this.speedY = 0;
 		this.visible = true;
 		this.destroyed = false;
-		
 	}
 
 	public Entity(Image[] images) {
@@ -37,8 +37,6 @@ public abstract class Entity extends Rectangle implements IDrawable{
 		this.visible = true;
 		this.destroyed = false;
 	}
-
-	public abstract void update();
 
 	
 	public void move(double x, double y) {

@@ -36,9 +36,9 @@ public class GameScene extends Scene {
 	
 	private void addMainTimeline(GraphicsContext gc) {
 		tl = new Timeline( new KeyFrame(Duration.seconds(1/60.),e -> {
-			GameLogic.getInstance().update();
-			GameLogic.getInstance().draw(gc);
+			GameLogic.getInstance().mainUpdate(gc);
 		}));
+		tl.setCycleCount(Timeline.INDEFINITE);
 	}
 	
 	private void playMainTimeline() {
