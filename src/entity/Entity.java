@@ -16,7 +16,6 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	protected double speedX;
 	protected double speedY;
 	protected boolean visible;
-	protected boolean destroyed;
 	
 	
 	
@@ -26,7 +25,6 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.speedX = 0;
 		this.speedY = 0;
 		this.visible = true;
-		this.destroyed = false;
 	}
 
 	public Entity(Image[] images) {
@@ -35,7 +33,6 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		this.speedX = 0;
 		this.speedY = 0;
 		this.visible = true;
-		this.destroyed = false;
 	}
 
 	

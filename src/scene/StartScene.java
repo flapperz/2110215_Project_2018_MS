@@ -2,7 +2,7 @@ package scene;
 
 
 
-import globalVariable.Const;
+import constants.Const;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;

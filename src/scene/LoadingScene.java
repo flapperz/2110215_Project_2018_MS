@@ -1,6 +1,6 @@
 package scene;
 
-import globalVariable.Const;
+import constants.Const;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

@@ -1,7 +1,8 @@
 package scene;
 
+import constants.Const;
 import controller.GameLogic;
-import globalVariable.Const;
+import input.Inputs;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -23,10 +24,10 @@ public class GameScene extends Scene {
 		super(new Pane());
 		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #000000;");
-		
 		canvas = new Canvas(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
-		
 		root.getChildren().add(canvas);
+		
+		Inputs.bindScene(this);
 		
 		addMainTimeline(canvas.getGraphicsContext2D());
 		

@@ -1,4 +1,4 @@
-package globalVariable;
+package constants;
 
 public class Const {
 	public static final int WINDOW_WIDTH = 1200;

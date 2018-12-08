@@ -1,7 +1,7 @@
 package entity.player;
 
+import constants.Const;
 import entity.Entity;
-import globalVariable.Const;
 import resource.Sprites;
 
 public class Player extends Entity{

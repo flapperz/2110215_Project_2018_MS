@@ -1,10 +1,10 @@
 package gui;
 
+import constants.Const;
 import controller.GameLogic;
 import controller.IDrawable;
 import controller.IUpdatable;
 import controller.View;
-import globalVariable.Const;
 import javafx.scene.canvas.GraphicsContext;
 import resource.Sprites;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import constants.Const;
 import entity.Entity;
 import entity.PlaceHoldEnt;
 import entity.player.Player;
@@ -18,7 +19,7 @@ public class GameLogic {
 	private BackGround bg;
 	
 	private GameLogic() {
-		create(new Player(1200-46,720-180));
+		create(new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180));
 		bg = new BackGround();
 	}
 
