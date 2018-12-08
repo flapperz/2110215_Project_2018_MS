@@ -3,7 +3,6 @@ package scene;
 
 
 import globalVariable.Const;
-import globalVariable.Sprites;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -13,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import main.Main;
+import resource.Sprites;
 
 public class StartScene extends Scene {
 	
@@ -42,7 +43,7 @@ public class StartScene extends Scene {
 		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #000000;");
 		
-		canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+		canvas = new Canvas(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		nameBanner = new ImageView(Sprites.ui_nameBanner[0]);
@@ -67,26 +68,32 @@ public class StartScene extends Scene {
 		animBg = new Timeline(new KeyFrame(Duration.seconds(1./60),e->{
 			backPos = (bgFrame*Const.BACK_CITY_SPEED)%3600;
 			frontPos = (bgFrame*Const.FRONT_CITY_SPEED)%3600;
-			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_train[0],0,0);
+			gc.drawImage(Sprites.bg_train[0],600,0,1200,900,0,0,1200,900);
 			
 			bgFrame++;
+
 		}));
 		
 		animBg.setCycleCount(Timeline.INDEFINITE);
 		animBg.play();
 	
 	}
+	
+	
+	private int tt = 20, ct= 0;
+	private double ty, cy = 0;
+	
 	
 	private void playStartAnimation(GraphicsContext gc) {
 		fadeFrame = 0;
@@ -95,22 +102,23 @@ public class StartScene extends Scene {
 			backPos = (bgFrame*Const.BACK_CITY_SPEED)%3600;
 			frontPos = (bgFrame*Const.FRONT_CITY_SPEED)%3600;
 			
-			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_sky[0],300,450,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 			
-			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_backCity[0],backPos,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT,
-					0,0,Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+			gc.drawImage(Sprites.bg_frontCity[0],frontPos,50,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT,
+					0,0,Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 
-			gc.drawImage(Sprites.bg_train[0],0,0);
+
+			gc.drawImage(Sprites.bg_train[0],600,0,1200,900,0,0,1200,900);
 
 			gc.setGlobalAlpha(1/30.*fadeFrame);
 			gc.setFill(Color.BLACK);
-			gc.fillRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.fillRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			gc.setGlobalAlpha(1);
 			fadeFrame++;
 			bgFrame++;
@@ -122,14 +130,16 @@ public class StartScene extends Scene {
 		});
 		dropFrame = 0;
 		animDrop = new Timeline(new KeyFrame(Duration.seconds(1/60.),e -> {
-			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			gc.setFill(Color.BLACK);
-			gc.fillRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.fillRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			gc.drawImage(Sprites.p_jumpR[0], 600-46, (1.8*(Math.pow(dropFrame,2.0))-180));
+	
 			dropFrame++;
 		}));
 		animDrop.setCycleCount(21);
 		animDrop.setOnFinished(e ->{ 
+			Main.getStage().setScene(Scenes.getGameScene());
 		});
 	}
 	

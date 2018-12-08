@@ -1,8 +1,6 @@
 package scene;
 
 import globalVariable.Const;
-import globalVariable.Sounds;
-import globalVariable.Sprites;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -13,6 +11,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import main.Main;
+import resource.Sounds;
+import resource.Sprites;
 
 public class LoadingScene extends Scene {
 	
@@ -22,7 +22,7 @@ public class LoadingScene extends Scene {
 	
 
 	private int animationFrame = 0;
-	private boolean animFinished = false;
+	private boolean animFinished = true;//TODO for debugging
 	
 	public LoadingScene() {
 		super(new Pane());
@@ -30,7 +30,7 @@ public class LoadingScene extends Scene {
 		root.setStyle("-fx-background-color: #FFFFFF;");
 		root.setPadding(new Insets(0));
 		
-		canvas = new Canvas(Const.WINDOW_WIDHT,Const.WINDOW_HEIGHT);
+		canvas = new Canvas(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		
 		root.getChildren().add(canvas);
@@ -84,7 +84,7 @@ public class LoadingScene extends Scene {
 	private void playLoopAnimation(GraphicsContext gc) {
 		KeyFrame kf = new KeyFrame(Duration.seconds(1./60),e-> {
 			animationFrame ++;
-			gc.clearRect(0, 0, Const.WINDOW_WIDHT, Const.WINDOW_HEIGHT);
+			gc.clearRect(0, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 			if(animationFrame <= 120) {
 				gc.setGlobalAlpha(animationFrame/120.);
 				gc.drawImage(Sprites.loading_banner[0], 300, 300);
