@@ -15,6 +15,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -27,7 +29,7 @@ public class GameScene extends Scene {
 	private Pane root;
 	private Canvas canvas;
 	
-	private AudioClip bgm = Sounds.bgm_game;
+	private MediaPlayer bgm;
 	
 	private Timeline tl;
 	
@@ -36,7 +38,8 @@ public class GameScene extends Scene {
 		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #FFFFFF;");
 		
-		bgm.setCycleCount(AudioClip.INDEFINITE);
+		bgm = new MediaPlayer(new Media(Sounds.bgm_game.getSource())); //fix audio not play bug
+		bgm.setCycleCount(MediaPlayer.INDEFINITE);
 		
 		canvas = new Canvas(Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -51,12 +54,12 @@ public class GameScene extends Scene {
 				
 	}
 	
-	public AudioClip getBgm() {
+	public MediaPlayer getBgm() {
 		return bgm;
 	}
 
 	public void setBgm(AudioClip bgm) {
-		this.bgm = bgm;
+		this.bgm = new MediaPlayer(new Media(bgm.getSource()));
 	}
 
 	private void addMainTimeline(GraphicsContext gc) {
