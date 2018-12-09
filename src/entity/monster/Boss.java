@@ -1,13 +1,15 @@
 package entity.monster;
 
 import constants.Const;
+import controller.GameLogic;
 import controller.SharedEntity;
 import controller.View;
 import entity.Entity;
 import entity.particle.ExplosionParticle;
 import entity.projectile.MonsterBullet;
-import javafx.scene.image.Image;
 import resource.Sprites;
+import resource.scene.GameScene;
+import resource.scene.Scenes;
 
 public class Boss extends Monster {
 	private final int MAXWALK = 300;
@@ -15,7 +17,7 @@ public class Boss extends Monster {
 	private int state = 0;
 	
 	public Boss(double x, double y) {
-		super(Sprites.m_boss, x, y, Const.BOSS_MAX_HP);
+		super(Sprites.m_boss, x, y, Const.BOSS_MAX_HP, 5000);
 		this.width = 100;
 		this.height = 200;
 		this.speedX = 1.2;
@@ -48,8 +50,8 @@ public class Boss extends Monster {
 				state = 1;
 				(new ExplosionParticle(x,y)).create();
 				View.getInstance().shake();
-				speedX = 10;
-				speedY = 10;
+				speedX = 6;
+				speedY = 6;
 			}
 		} else if (state == 1) {
 			
@@ -70,11 +72,17 @@ public class Boss extends Monster {
 			} else {
 				walkTick = MAXWALK;
 				destinationX = 1200 + (Math.random()-0.5)*400;
-				destinationY = -600 - (Math.random())*500;
+				destinationY =  -(Math.random()-0.5)*400;
 			}
 			
 		}
 		
+	}
+	
+	@Override
+	public void onDestroy() {
+		GameLogic.getInstance().setKillCount(GameLogic.getInstance().getKillCount() + 1);
+		((GameScene) Scenes.getGameScene()).playWinAnim();
 	}
 	
 	

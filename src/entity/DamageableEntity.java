@@ -24,8 +24,7 @@ public abstract class DamageableEntity extends Entity {
 	
 	protected void damaged(int atk) {
 		hp -= atk;
-		(new HitParticle(x,y)).create();
-		if (hp < 0) {
+		if (hp <= 0) {
 			hp = 0;
 			this.destroy();
 		}

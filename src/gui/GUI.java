@@ -1,10 +1,12 @@
 package gui;
 
 import constants.Const;
+import controller.GameLogic;
 import controller.IDrawable;
 import controller.SharedEntity;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class GUI implements IDrawable{
 	private int playerHp;
@@ -63,10 +65,13 @@ public class GUI implements IDrawable{
 			
 			gc.setFill(Color.BLACK);
 			gc.fillRect(bX, bY, BOSS_BAR_L, BOSS_BAR_H);
-			gc.setFill(Color.color(0.705, 1, 0.07));
+			gc.setFill(Color.color(1, 0.47, 0.1));
 			gc.fillRect(bX, bY, bdesL, BOSS_BAR_H);
 		}
 		
+		gc.setFill(Color.WHITE);
+		gc.setFont(new Font(45 + (GameLogic.getInstance().getScore()/200)));
+		gc.fillText(Integer.toString(GameLogic.getInstance().getScore()), pX, pY-10);
 		
 	}
 

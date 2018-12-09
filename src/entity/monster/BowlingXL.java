@@ -12,6 +12,7 @@ public class BowlingXL extends Bowling{
 		height = 100;
 		speedX = 1.5;
 		speedY = 1.5;
+		value = 450;
 	}
 	
 	@Override

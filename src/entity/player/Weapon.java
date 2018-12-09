@@ -1,13 +1,16 @@
 package entity.player;
 
+import controller.GameLogic;
 import controller.SharedEntity;
 import controller.View;
 import entity.Entity;
 import entity.monster.Monster;
+import entity.particle.ScoreParticle;
 import entity.projectile.PlayerBullet;
 import entity.projectile.WeaponProjectile;
 import exception.CharacterOutBoundException;
 import input.Input;
+import resource.Sounds;
 import resource.Sprites;
 
 public class Weapon extends Entity{
@@ -59,14 +62,19 @@ public class Weapon extends Entity{
 
 	private void processFire() {
 		if(Input.isLeftMouseActive() && fireCD == 0 && (state == NORMAL || state == ATTACH)) {
+			Sounds.fx_fire.play();
 			fireCD = 5;
 			(new PlayerBullet(x,y)).create();
 		} else if (Input.isRightMouseTrigger()) { //nested if else due to machanism of trigger can only be check once
 			if (state == NORMAL) {
+				Sounds.fx_skill.play();
 				state = FIRE;
 				visible = false;
 				(new WeaponProjectile(x,y)).create();
 			} else if (state == ATTACH) {
+				Sounds.fx_dash.play();
+				GameLogic.getInstance().setScore(GameLogic.getInstance().getScore() + 50);
+				(new ScoreParticle(x,y,50)).create();
 				SharedEntity.getInstance().getPlayer().setJumpCount(2);
 				SharedEntity.getInstance().getPlayer().heal(80);
 				SharedEntity.getInstance().getPlayer().setOnWarp();

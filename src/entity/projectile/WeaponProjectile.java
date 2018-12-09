@@ -1,11 +1,11 @@
 package entity.projectile;
 
-import constants.Const;
 import controller.SharedEntity;
 import controller.View;
 import entity.Entity;
 import entity.monster.Monster;
 import input.Input;
+import resource.Sounds;
 import resource.Sprites;
 
 public class WeaponProjectile extends Projectile{
@@ -37,6 +37,7 @@ public class WeaponProjectile extends Projectile{
 	
 	@Override
 	public int attack(Entity e) {
+		Sounds.fx_targetLock.play();
 		SharedEntity.getInstance().getWeapon().setState(ATTACH);
 		SharedEntity.getInstance().getWeapon().setVisible(true);
 		SharedEntity.getInstance().getWeapon().setAttach((Monster) e);

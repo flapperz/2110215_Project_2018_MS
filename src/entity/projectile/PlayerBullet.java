@@ -1,8 +1,11 @@
 package entity.projectile;
 
+import controller.GameLogic;
 import controller.View;
 import entity.Entity;
+import entity.particle.ScoreParticle;
 import input.Input;
+import resource.Sounds;
 import resource.Sprites;
 
 public class PlayerBullet extends Projectile {
@@ -17,8 +20,10 @@ public class PlayerBullet extends Projectile {
 	
 	@Override
 	public int attack(Entity e) {
+		GameLogic.getInstance().setScore(GameLogic.getInstance().getScore() + 10);
+		(new ScoreParticle(x,y,10)).create();
 		destroy();
-		return 50;
+		return 80;
 	}
 	
 }

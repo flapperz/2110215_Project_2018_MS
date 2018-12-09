@@ -14,6 +14,7 @@ public class GunnerBowling extends Bowling{
 		height = 70;
 		speedX = 4;
 		speedY = 4;
+		value = 250;
 	}
 
 

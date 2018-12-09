@@ -9,11 +9,14 @@ public class Sprites {
 	public static final Image[] ui_nameBanner = new Image[1];
 	public static final Image[] ui_start = new Image[1];
 	public static final Image[] ui_startH = new Image[1];
+	public static final Image[] ui_cursor = new Image[1];
 	
 	public static final Image[] bg_sky = new Image[1];
 	public static final Image[] bg_backCity = new Image[1];
 	public static final Image[] bg_frontCity = new Image[1];
 	public static final Image[] bg_train = new Image[1];
+	public static final Image[] bg_over = new Image[1];
+	public static final Image[] bg_win = new Image[1];
 	
 	public static final Image[] p_jumpL = new Image[1];
 	public static final Image[] p_jumpR = new Image[1];
@@ -29,6 +32,7 @@ public class Sprites {
 	public static final Image[] fx_mBullet = new Image[1];
 	public static final Image[] fx_jump = new Image[1];
 	public static final Image[] fx_hit = new Image[1];
+	public static final Image[] fx_phit = new Image[1];
 	public static final Image[] fx_mark = new Image[1];
 	public static final Image[] fx_dMark = new Image[1];
 	public static final Image[] fx_explosion = new Image[4];
@@ -48,11 +52,14 @@ public class Sprites {
 		ui_nameBanner[0] = new Image(ClassLoader.getSystemResource("images/ui/nameBanner.png").toString());
 		ui_start[0] = new Image(ClassLoader.getSystemResource("images/ui/start.png").toString());
 		ui_startH[0] = new Image(ClassLoader.getSystemResource("images/ui/startH.png").toString());
+		ui_cursor[0] = new Image(ClassLoader.getSystemResource("images/ui/cursor.png").toString());
 		
 		bg_sky[0] = new Image(ClassLoader.getSystemResource("images/bg/sky.png").toString());
 		bg_backCity[0] = new Image(ClassLoader.getSystemResource("images/bg/backCity.png").toString());
 		bg_frontCity[0] = new Image(ClassLoader.getSystemResource("images/bg/frontCity.png").toString());
 		bg_train[0] = new Image(ClassLoader.getSystemResource("images/bg/train.png").toString());
+		bg_over[0] = new Image(ClassLoader.getSystemResource("images/bg/gameOver.png").toString());
+		bg_win[0] = new Image(ClassLoader.getSystemResource("images/bg/victory.png").toString());
 		
 		p_jumpL[0] = new Image(ClassLoader.getSystemResource("images/player/jumpL.png").toString());
 		p_jumpR[0] = new Image(ClassLoader.getSystemResource("images/player/jumpR.png").toString());
@@ -64,6 +71,7 @@ public class Sprites {
 		fx_bullet[0] = new Image(ClassLoader.getSystemResource("images/fx/bullet.png").toString());
 		fx_jump[0] = new Image(ClassLoader.getSystemResource("images/fx/jumpFx.png").toString());
 		fx_hit[0] = new Image(ClassLoader.getSystemResource("images/fx/hitFx.png").toString());
+		fx_phit[0] = new Image(ClassLoader.getSystemResource("images/fx/phitFx.png").toString());
 		fx_mark[0] = new Image(ClassLoader.getSystemResource("images/fx/mark.png").toString());
 		fx_dMark[0] = new Image(ClassLoader.getSystemResource("images/fx/dMark.png").toString());
 		fx_hover[0] = new Image(ClassLoader.getSystemResource("images/fx/hoverBase.png").toString());

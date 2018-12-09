@@ -5,6 +5,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -22,13 +23,15 @@ public class LoadingScene extends Scene {
 	
 
 	private int animationFrame = 0;
-	private boolean animFinished = true;//TODO for debugging
+	private boolean animFinished = false;//TODO for debugging
 	
 	public LoadingScene() {
 		super(new Pane());
 		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #FFFFFF;");
 		root.setPadding(new Insets(0));
+		
+		setCursor(Cursor.DISAPPEAR);
 		
 		canvas = new Canvas(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -77,6 +80,7 @@ public class LoadingScene extends Scene {
 		ft.setToValue(0);
 		ft.setOnFinished(e->{
 			Main.getStage().setScene(Scenes.getStartScene());
+			((StartScene)Scenes.getStartScene()).getBgm().play();
 		});	
 		ft.play();
 	}
@@ -93,7 +97,6 @@ public class LoadingScene extends Scene {
 				gc.setGlobalAlpha(1);
 				gc.drawImage(Sprites.loading_banner[0], 300, 300);
 			}
-			//TODO enhance loading
 			
 		});
 		

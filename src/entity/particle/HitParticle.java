@@ -1,5 +1,6 @@
 package entity.particle;
 
+import resource.Sounds;
 import resource.Sprites;
 
 public class HitParticle extends Particle{

@@ -1,16 +1,24 @@
 package entity.player;
 
+
+
 import constants.Const;
+import resource.scene.GameScene;
+
 import entity.DamageableEntity;
 import entity.IAttackable;
 import entity.monster.Monster;
+import entity.particle.HitParticle;
 import entity.particle.HoverParticle;
 import entity.particle.JumpParticle;
+import entity.particle.PHitParticle;
 import entity.projectile.MonsterBullet;
 import exception.CharacterOutBoundException;
 import input.Input;
 import javafx.scene.input.KeyCode;
+import resource.Sounds;
 import resource.Sprites;
+import resource.scene.Scenes;
 
 public class Player extends DamageableEntity {
 	
@@ -90,6 +98,7 @@ public class Player extends DamageableEntity {
 			speedY = -JUMP_SPEED;
 			jumpCount -= 1;
 			(new JumpParticle(x, y+87)).create();
+			Sounds.fx_jump.play();
 		}
 	}
 	
@@ -135,31 +144,29 @@ public class Player extends DamageableEntity {
 		return 1;
 	}
 	
-	@Override
-	public void damaged(int atk) {
-		hp -= atk;
-		if (hp < 0) {
-			hp = 0;
-			//TODO gameOver
-		}
-	}
 
 	@Override
 	public void onDestroy() {
-		
+		((GameScene)Scenes.getGameScene()).stopMainTimeline();
+		((GameScene)Scenes.getGameScene()).playOverAnim();
 	}
 
 	@Override
 	public void attackedBy(IAttackable e) {
 		if(e instanceof Monster && isImmortal == false) {
+			Sounds.fx_onhitp.play();
+			(new PHitParticle(x,y)).create();
 			damaged(e.attack(this));
 			isImmortal = true;
 		} else if (e instanceof MonsterBullet) {
+			Sounds.fx_onhitp.play();
+			(new PHitParticle(x,y)).create();
 			damaged(e.attack(this));
 		}
 		
 	}
 	
+
 	@Override
 	public void setX(double x) throws CharacterOutBoundException {
 		if(x < 0 || x > 2400) {

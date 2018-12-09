@@ -7,7 +7,7 @@ import resource.Sprites;
 public class MonsterBullet extends Projectile{
 
 	public MonsterBullet(double x, double y) {
-		super(Sprites.fx_mBullet, x, y, SharedEntity.getInstance().getPlayer().getX(), SharedEntity.getInstance().getPlayer().getY(), 1.6);
+		super(Sprites.fx_mBullet, x, y, SharedEntity.getInstance().getPlayer().getX(), SharedEntity.getInstance().getPlayer().getY(), 3);
 	}
 
 	@Override

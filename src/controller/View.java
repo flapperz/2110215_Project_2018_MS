@@ -80,6 +80,18 @@ public class View extends Rectangle implements IUpdatable{
 		}		
 	}
 	
+	public void reset() {
+		shaked = false;
+		shakeTick = 0;
+		
+		desX = 0;
+		desY = 0;
+		ct = 0;
+		tt = 10; // tt = interval of shaking
+		tx = 0;
+		ty = 0;
+	}
+	
 	public void shake() {
 		shakeTick = MAXSHAKETICK;
 	}

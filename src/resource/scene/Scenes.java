@@ -27,6 +27,18 @@ public class Scenes {
 	public static Scene getGameScene() {
 		return gameScene;
 	}
-	
+
+	public static void setLoadingScene(Scene loadingScene) {
+		Scenes.loadingScene = loadingScene;
+	}
+
+	public static void setStartScene(Scene startScene) {
+		Scenes.startScene = startScene;
+	}
+
+	public static void setGameScene(Scene gameScene) {
+		Scenes.gameScene = gameScene;
+	}
+
 	
 }

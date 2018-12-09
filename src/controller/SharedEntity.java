@@ -114,6 +114,18 @@ public class SharedEntity {
 		return instance;
 	}
 
+//Reset
+	public void reset() {
+		instance.entities.clear();
+		player = new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180);
+		weapon = new Weapon();
+		entities.add(player);
+		entities.add(weapon);
+	}
+	
+	
+//Getter-Setter
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -136,6 +148,10 @@ public class SharedEntity {
 
 	public void setBoss(Boss boss) {
 		this.boss = boss;
+	}
+	
+	public int getSize() {
+		return entities.size();
 	}
 	
 	

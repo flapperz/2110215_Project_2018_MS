@@ -5,14 +5,20 @@ package resource.scene;
 import constants.Const;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import main.Main;
+import resource.Sounds;
 import resource.Sprites;
 
 public class StartScene extends Scene {
@@ -21,6 +27,8 @@ public class StartScene extends Scene {
 	private Canvas canvas;
 	private ImageView nameBanner;
 	private ImageView startBtn;
+	
+	private final AudioClip bgm = Sounds.bgm_train;
 	
 	private Timeline animBg;
 	private int bgFrame;
@@ -42,9 +50,12 @@ public class StartScene extends Scene {
 		super(new Pane());
 		root = (Pane)getRoot();
 		root.setStyle("-fx-background-color: #000000;");
-		
+		setCursor(new ImageCursor(Sprites.ui_cursor[0]));
+	
 		canvas = new Canvas(Const.WINDOW_WIDTH,Const.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
+		
+		bgm.setCycleCount(AudioClip.INDEFINITE);
 		
 		nameBanner = new ImageView(Sprites.ui_nameBanner[0]);
 		nameBanner.setX(120);
@@ -58,7 +69,7 @@ public class StartScene extends Scene {
 		
 		addStartEventHandler();
 		playBgAnimation(gc);
-	
+		
 	}
 	
 	
@@ -126,6 +137,7 @@ public class StartScene extends Scene {
 		animFade.setCycleCount(30);
 		animFade.play();
 		animFade.setOnFinished(e ->{ 
+			bgm.stop();
 			animDrop.play();
 		});
 		dropFrame = 0;
@@ -166,4 +178,10 @@ public class StartScene extends Scene {
 			}
 		});
 	}
+
+
+	public AudioClip getBgm() {
+		return bgm;
+	}
+	
 }

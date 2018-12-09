@@ -1,11 +1,8 @@
 package entity.projectile;
 
 import constants.Const;
-import controller.SharedEntity;
-import controller.View;
 import entity.Entity;
 import entity.IAttackable;
-import entity.monster.Monster;
 import javafx.scene.image.Image;
 
 public abstract class Projectile extends Entity implements IAttackable{
