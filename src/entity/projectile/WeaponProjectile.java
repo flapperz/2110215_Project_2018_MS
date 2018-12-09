@@ -13,7 +13,7 @@ public class WeaponProjectile extends Projectile{
 	private final int NORMAL = 0;
 	private final int ATTACH = 2;
 	
-	private int age = 240;
+	private int age = 120;
 	
 	public WeaponProjectile(double x, double y) {
 		super(Sprites.p_weapon, x, y, 

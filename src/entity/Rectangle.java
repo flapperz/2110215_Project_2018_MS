@@ -21,7 +21,8 @@ public abstract class Rectangle {
 	}
 	
 	public boolean isCollideWith(Rectangle b) {
-		if (x < b.x + b.width && x + width > b.x && y < b.y + b.height && height + y > b.y) return true;
+		if (x - width/2 < b.x + b.width/2 && x + width/2 > b.x - b.width/2 
+				&& y - height/2 < b.y + b.height/2 && height/2 + y > b.y - b.height/2) return true;
 		return false;
 	}
 	

@@ -6,7 +6,10 @@ import java.util.List;
 import entity.DamageableEntity;
 import entity.Entity;
 import entity.IAttackable;
+import entity.monster.Boss;
 import entity.monster.Bowling;
+import entity.monster.BowlingXL;
+import entity.monster.GunnerBowling;
 import gui.GUI;
 import javafx.scene.canvas.GraphicsContext;
 import map.BackGround;
@@ -15,6 +18,7 @@ public class GameLogic {
 	
 	private static final GameLogic instance = new GameLogic();
 	private int frame;
+	private int killCount;
 	
 	private BackGround bg;
 	
@@ -22,13 +26,17 @@ public class GameLogic {
 		bg = new BackGround();
 		
 	}
-
 	
 	public void mainUpdate(GraphicsContext gc) {
 		bg.update();
 		
 		if(frame == 10) {
 			(new Bowling(500,500)).create();
+			(new BowlingXL(500,500)).create();
+			(new GunnerBowling(500,500)).create();
+			Boss boss = new Boss(500,500);
+			boss.create();
+			SharedEntity.getInstance().setBoss(boss);
 		}
 		
 		View.getInstance().update();
@@ -73,8 +81,6 @@ public class GameLogic {
 		}
 	}
 	
-	
-	
 	//getGameL
 	
 	public static GameLogic getInstance() {
@@ -84,6 +90,16 @@ public class GameLogic {
 	public int getFrame() {
 		return frame;
 	}
+
+	public int getKillCount() {
+		return killCount;
+	}
+
+	public void setKillCount(int killCount) {
+		this.killCount = killCount;
+	}
+	
+	
 
 
 	

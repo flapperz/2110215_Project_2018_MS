@@ -60,7 +60,7 @@ public class Sprites {
 		p_idleR[0] = new Image(ClassLoader.getSystemResource("images/player/idleR.png").toString());
 		p_weapon[0] = new Image(ClassLoader.getSystemResource("images/player/weapon.png").toString());
 		
-		fx_mBullet[0] = new Image(ClassLoader.getSystemResource("images/fx/bullet.png").toString());
+		fx_mBullet[0] = new Image(ClassLoader.getSystemResource("images/fx/bulletM.png").toString());
 		fx_bullet[0] = new Image(ClassLoader.getSystemResource("images/fx/bullet.png").toString());
 		fx_jump[0] = new Image(ClassLoader.getSystemResource("images/fx/jumpFx.png").toString());
 		fx_hit[0] = new Image(ClassLoader.getSystemResource("images/fx/hitFx.png").toString());

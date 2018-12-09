@@ -10,8 +10,8 @@ import resource.Sprite;
 
 public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	
-	public static final int LEFT = -1;
-	public static final int RIGHT = 1;
+	protected static final int LEFT = -1;
+	protected static final int RIGHT = 1;
 	
 	protected final Sprite sprite = new Sprite();
 	protected double speedX;
@@ -63,8 +63,10 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 	
 	protected void move() {
 		if(x < destinationX-speedX) {
+			facing = RIGHT;
 			x += speedX;
 		}else if(x > destinationX+speedX) {
+			facing = LEFT;
 			x -= speedX;
 		}else {
 			x = destinationX;

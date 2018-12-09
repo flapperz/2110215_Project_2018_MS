@@ -8,6 +8,7 @@ import constants.Const;
 import entity.DamageableEntity;
 import entity.Entity;
 import entity.IAttackable;
+import entity.monster.Boss;
 import entity.monster.Monster;
 import entity.particle.Particle;
 import entity.player.Player;
@@ -21,6 +22,7 @@ public class SharedEntity {
 	private List<Entity> entities = new CopyOnWriteArrayList<>();
 	private Player player = new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180);
 	private Weapon weapon = new Weapon();
+	private Boss boss;
 	
 	private SharedEntity() {
 		entities.add(player);
@@ -116,6 +118,10 @@ public class SharedEntity {
 		return player;
 	}
 	
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
+	
 	public Weapon getWeapon() {
 		return weapon;
 	}
@@ -123,4 +129,14 @@ public class SharedEntity {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public Boss getBoss() {
+		return boss;
+	}
+
+	public void setBoss(Boss boss) {
+		this.boss = boss;
+	}
+	
+	
 }

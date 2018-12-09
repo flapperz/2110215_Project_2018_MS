@@ -6,6 +6,7 @@ import entity.IAttackable;
 import entity.monster.Monster;
 import entity.particle.HoverParticle;
 import entity.particle.JumpParticle;
+import entity.projectile.MonsterBullet;
 import exception.CharacterOutBoundException;
 import input.Input;
 import javafx.scene.input.KeyCode;
@@ -22,6 +23,8 @@ public class Player extends DamageableEntity {
 	private int immortalTick = 90;
 	private boolean isGround = true;
 	private int jumpCount = 2;
+	
+	private int warpTick = 0;
 	
 
 	public Player(double x, double y) {
@@ -53,6 +56,8 @@ public class Player extends DamageableEntity {
 			processGravity();
 			move();
 		}
+		
+		processWarp();
 	}
 	
 
@@ -65,7 +70,7 @@ public class Player extends DamageableEntity {
 		
 	}
 	
-	public void processWalk() {
+	private void processWalk() {
 		if(Input.isKeyActive(KeyCode.A)) {
 			sprite.setSprite(Sprites.p_walkL);
 			facing = LEFT;
@@ -80,7 +85,7 @@ public class Player extends DamageableEntity {
 		}
 	}
 	
-	public void processJump() {
+	private void processJump() {
 		if(Input.isKeyTrigger(KeyCode.W) && jumpCount > 0) {
 			speedY = -JUMP_SPEED;
 			jumpCount -= 1;
@@ -88,7 +93,7 @@ public class Player extends DamageableEntity {
 		}
 	}
 	
-	public void processGravity() {
+	private void processGravity() {
 		if(!isGround) {
 			sprite.setSprite(facing == LEFT ? Sprites.p_jumpL : Sprites.p_jumpR);
 			speedY += GRAVITY;
@@ -99,7 +104,15 @@ public class Player extends DamageableEntity {
 		
 	}
 	
-	public boolean hover() {
+	private void processWarp() {
+		if(warpTick > 0) {
+			sprite.setSprite(Sprites.p_dashL);
+			sprite.setSpeed(0.1);
+			warpTick--;
+		}
+	}
+	
+	private boolean hover() {
 		if(Input.isKeyActive(KeyCode.S) && !isGround) {
 			sprite.setSprite(facing == LEFT ? Sprites.p_idleL : Sprites.p_idleR);
 			speedY = 0;
@@ -107,6 +120,12 @@ public class Player extends DamageableEntity {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setOnWarp() {
+		sprite.setSprite(Sprites.p_dashL);
+		sprite.setSpeed(0.1);
+		warpTick = 40;
 	}
 	
 	
@@ -119,7 +138,6 @@ public class Player extends DamageableEntity {
 	@Override
 	public void damaged(int atk) {
 		hp -= atk;
-		System.out.println(hp);
 		if (hp < 0) {
 			hp = 0;
 			//TODO gameOver
@@ -136,6 +154,8 @@ public class Player extends DamageableEntity {
 		if(e instanceof Monster && isImmortal == false) {
 			damaged(e.attack(this));
 			isImmortal = true;
+		} else if (e instanceof MonsterBullet) {
+			damaged(e.attack(this));
 		}
 		
 	}
@@ -158,6 +178,16 @@ public class Player extends DamageableEntity {
 		}
 	}
 	
+	public void heal(int amount) {
+		if (hp < Const.MAX_HP + amount) {
+			hp += amount;
+		} else {
+			hp = Const.MAX_HP;
+		}
+	}
+	
+	//Getter-Setter
+	
 	public boolean isImmortal() {
 		return isImmortal;
 	}
@@ -168,6 +198,14 @@ public class Player extends DamageableEntity {
 
 	public boolean isGround() {
 		return isGround;
+	}
+
+	public int getJumpCount() {
+		return jumpCount;
+	}
+
+	public void setJumpCount(int jumpCount) {
+		this.jumpCount = jumpCount;
 	}
 
 	public void setGround(boolean isGround) {

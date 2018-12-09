@@ -14,6 +14,7 @@ public class Const {
 	public static final double STAGE_WIDTH = 2400;
 	
 	public static final int MAX_HP = 1000;
+	public static final int BOSS_MAX_HP = 10000;
 	
 	
 }

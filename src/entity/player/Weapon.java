@@ -8,7 +8,6 @@ import entity.projectile.PlayerBullet;
 import entity.projectile.WeaponProjectile;
 import exception.CharacterOutBoundException;
 import input.Input;
-import javafx.scene.canvas.GraphicsContext;
 import resource.Sprites;
 
 public class Weapon extends Entity{
@@ -68,6 +67,9 @@ public class Weapon extends Entity{
 				visible = false;
 				(new WeaponProjectile(x,y)).create();
 			} else if (state == ATTACH) {
+				SharedEntity.getInstance().getPlayer().setJumpCount(2);
+				SharedEntity.getInstance().getPlayer().heal(80);
+				SharedEntity.getInstance().getPlayer().setOnWarp();
 				try {
 					SharedEntity.getInstance().getPlayer().setX(x);
 					SharedEntity.getInstance().getPlayer().setY(y);
