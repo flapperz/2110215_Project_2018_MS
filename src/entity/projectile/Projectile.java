@@ -28,11 +28,6 @@ public abstract class Projectile extends Entity implements IAttackable{
 
 	@Override
 	public void update() {
-		for (Monster m: SharedEntity.getInstance().getMonsters()) {
-			if (this.isCollideWith(m)) {
-				m.damaged(this);
-			}
-		}
 		
 		move();
 		if(this.x < 0 || this.x > Const.STAGE_WIDTH || this.y < -9000 || this.y > Const.WINDOW_HEIGHT) {

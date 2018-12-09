@@ -13,7 +13,7 @@ public class Const {
 	public static final double BACK_CITY_SPEED = 2;
 	public static final double STAGE_WIDTH = 2400;
 	
-	
+	public static final int MAX_HP = 1000;
 	
 	
 }

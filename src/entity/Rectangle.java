@@ -1,5 +1,7 @@
 package entity;
 
+import exception.CharacterOutBoundException;
+
 public abstract class Rectangle {
 	
 	protected double x;
@@ -50,7 +52,7 @@ public abstract class Rectangle {
 		return x;
 	}
 
-	public void setX(double x) {
+	public void setX(double x) throws Exception {
 		this.x = x;
 	}
 
@@ -58,7 +60,7 @@ public abstract class Rectangle {
 		return y;
 	}
 
-	public void setY(double y) {
+	public void setY(double y) throws CharacterOutBoundException {
 		this.y = y;
 	}
 		

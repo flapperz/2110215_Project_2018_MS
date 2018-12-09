@@ -3,11 +3,11 @@ package controller;
 import java.util.Collections;
 import java.util.List;
 
-
+import entity.DamageableEntity;
 import entity.Entity;
-import entity.monster.Monster;
-import entity.particle.Particle;
-import entity.projectile.Projectile;
+import entity.IAttackable;
+import entity.monster.Bowling;
+import gui.GUI;
 import javafx.scene.canvas.GraphicsContext;
 import map.BackGround;
 
@@ -26,17 +26,38 @@ public class GameLogic {
 	
 	public void mainUpdate(GraphicsContext gc) {
 		bg.update();
-		View.getInstance().update();
-		for (Entity e: SharedEntity.getInstance().getEntities()) {
-			e.update();
+		
+		if(frame == 10) {
+			(new Bowling(500,500)).create();
 		}
 		
-		draw(gc);
+		View.getInstance().update();
+		
+		updateEntity();
+		updateDamageAttack();
+		updateDraw(gc);
 		frame++;
 	}
 	
-	public void draw(GraphicsContext gc) {
-		List<IDrawable> drawList = SharedEntity.getInstance().getDrawable();
+	public void updateEntity() {
+		for (Entity e: SharedEntity.getInstance().getEntities()) {
+			e.update();
+		}
+	}
+	
+	public void updateDamageAttack() {
+		for (DamageableEntity victim: SharedEntity.getInstance().getDamageableEntities()) {
+			for (IAttackable attacker: SharedEntity.getInstance().getIAttackables()) {
+				if(victim.isCollideWith((Entity)attacker)) {
+					victim.attackedBy(attacker);
+				}
+			}
+		}
+	}
+	
+	public void updateDraw(GraphicsContext gc) {
+		List<IDrawable> drawList = SharedEntity.getInstance().getDrawables();
+		drawList.add(GUI.getInstance());
 		Collections.sort(drawList, (IDrawable o1, IDrawable o2) -> {
 			if (o1.getZ() > o2.getZ())
 				return 1;
@@ -52,9 +73,7 @@ public class GameLogic {
 		}
 	}
 	
-	public void create(Entity e) {
-		SharedEntity.getInstance().add(e);
-	}
+	
 	
 	//getGameL
 	

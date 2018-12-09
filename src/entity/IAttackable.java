@@ -1,5 +1,5 @@
 package entity;
 
 public interface IAttackable {
-	public int attack();
+	public int attack(Entity e);
 }

@@ -95,5 +95,57 @@ public abstract class Entity extends Rectangle implements IDrawable,IUpdatable{
 		return visible;
 	}
 	
+	//getter setter;
+
+	public double getSpeedX() {
+		return speedX;
+	}
+
+	public void setSpeedX(double speedX) {
+		this.speedX = speedX;
+	}
+
+	public double getSpeedY() {
+		return speedY;
+	}
+
+	public void setSpeedY(double speedY) {
+		this.speedY = speedY;
+	}
+
+	public double getDestinationX() {
+		return destinationX;
+	}
+
+	public void setDestinationX(double destinationX) {
+		this.destinationX = destinationX;
+	}
+
+	public double getDestinationY() {
+		return destinationY;
+	}
+
+	public void setDestinationY(double destinationY) {
+		this.destinationY = destinationY;
+	}
+
+	public int getFacing() {
+		return facing;
+	}
+
+	public void setFacing(int facing) {
+		this.facing = facing;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
+	
+	
 	
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import constants.Const;
+import entity.DamageableEntity;
 import entity.Entity;
+import entity.IAttackable;
 import entity.monster.Monster;
 import entity.particle.Particle;
 import entity.player.Player;
@@ -22,7 +24,7 @@ public class SharedEntity {
 	
 	private SharedEntity() {
 		entities.add(player);
-		entities.add(new Weapon());
+		entities.add(weapon);
 	}
 	
 	public void add(Entity e) {
@@ -40,7 +42,7 @@ public class SharedEntity {
 	
 	//Getter
 	
-	public List<IDrawable> getDrawable() {
+	public List<IDrawable> getDrawables() {
 		List<IDrawable> list = new ArrayList<>();
 		for (Entity e: entities) {
 				list.add((IDrawable)e);
@@ -81,6 +83,26 @@ public class SharedEntity {
 		for (Entity e: entities) {
 			if (e instanceof Monster) {
 				list.add((Monster) e);
+			}
+		}
+		return list;
+	}
+	
+	public List<DamageableEntity> getDamageableEntities() {
+		List<DamageableEntity> list = new ArrayList<>();
+		for (Entity e: entities) {
+			if (e instanceof DamageableEntity) {
+				list.add((DamageableEntity) e);
+			}
+		}
+		return list;
+	}
+	
+	public List<IAttackable> getIAttackables() {
+		List<IAttackable> list = new ArrayList<>();
+		for (Entity e: entities) {
+			if (e instanceof IAttackable) {
+				list.add((IAttackable) e);
 			}
 		}
 		return list;
