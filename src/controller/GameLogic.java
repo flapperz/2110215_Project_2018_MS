@@ -136,6 +136,7 @@ public class GameLogic {
 		instance.frame = 0;
 		instance.state = 0;
 		instance.score = 0;
+		instance.killCount = 0;
 	}
 	
 	//getGameLogic
