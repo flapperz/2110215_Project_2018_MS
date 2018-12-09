@@ -9,7 +9,7 @@ public class Bowling extends Monster{
 	protected int walkTick = 0;
 	
 	public Bowling(double x, double y) {
-		super(Sprites.m_mob1R, x, y, 1000, 150);
+		super(Sprites.m_mob1R, x, y, 1600, 150);
 		this.width = 65;
 		this.height = 65;
 		this.speedX = 3;

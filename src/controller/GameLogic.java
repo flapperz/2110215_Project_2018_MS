@@ -20,6 +20,7 @@ import entity.projectile.Projectile;
 import gui.GUI;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.MediaPlayer;
 import resource.Sounds;
 import resource.scene.Scenes;
 
@@ -66,7 +67,7 @@ public class GameLogic {
 				} else {
 					(new GunnerBowling(sx, sy)).create();
 				}
-				spawnTick = 60 + (int)(Math.random()*360);
+				spawnTick = 60 + (int)(Math.random()*300);
 			} else if (spawnTick <= 0) {
 				spawnTick = 1200;
 			} else {
@@ -77,6 +78,7 @@ public class GameLogic {
 				state = 1;
 				((GameScene)Scenes.getGameScene()).getBgm().stop();
 				((GameScene)Scenes.getGameScene()).setBgm(Sounds.bgm_boss);
+				((GameScene)Scenes.getGameScene()).getBgm().setCycleCount(MediaPlayer.INDEFINITE);
 				((GameScene)Scenes.getGameScene()).getBgm().play();
 				if(SharedEntity.getInstance().getBoss() == null) {
 					for (Monster m : SharedEntity.getInstance().getMonsters()) {

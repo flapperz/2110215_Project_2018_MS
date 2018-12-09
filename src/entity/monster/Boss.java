@@ -55,7 +55,7 @@ public class Boss extends Monster {
 			}
 		} else if (state == 1) {
 			
-			if (walkTick == 220) {
+			if ((walkTick == 220 || walkTick == 290) && SharedEntity.getInstance().getMonsters().size() < 12) {
 				double r = Math.random();
 				if(r < 0.9) {
 					(new Bowling(x,y)).create();
