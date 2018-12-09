@@ -37,7 +37,7 @@ public abstract class Monster extends DamageableEntity implements IAttackable{
 
 	
 	protected void processMark() {
-		if(hp < 500 && state == NORMAL) {
+		if(hp < 1000 && state == NORMAL) {
 			state = MARK;
 		}
 		if(state == MARK) {

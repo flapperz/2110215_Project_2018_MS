@@ -9,7 +9,7 @@ public class GunnerBowling extends Bowling{
 	public GunnerBowling(double x, double y) {
 		super(x, y);
 		sprite.setSprite(Sprites.m_mob2R);
-		hp = 500;
+		hp = 1000;
 		width = 70;
 		height = 70;
 		speedX = 4;

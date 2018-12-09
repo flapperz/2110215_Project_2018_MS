@@ -13,10 +13,10 @@ public class Const {
 	public static final double BACK_CITY_SPEED = 2;
 	public static final double STAGE_WIDTH = 2400;
 	
-	public static final int MAX_HP = 10000000;
-	public static final int BOSS_MAX_HP = 20000;
+	public static final int MAX_HP = 1500;
+	public static final int BOSS_MAX_HP = 50000;
 	
-	public static final int KILLTHRSH = 3;
+	public static final int KILLTHRSH = 25;
 	
 	public static final int MAX_ENTITY = 100;
 	
