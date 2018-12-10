@@ -116,7 +116,7 @@ public class SharedEntity {
 
 //Reset
 	public void reset() {
-		instance.entities.clear();
+		clear();
 		player = new Player(Const.WINDOW_WIDTH-46,Const.GROUND_POS-180);
 		weapon = new Weapon();
 		entities.add(player);

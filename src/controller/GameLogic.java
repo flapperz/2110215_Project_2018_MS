@@ -66,7 +66,7 @@ public class GameLogic {
 				}
 				spawnTick = 60 + (int)(Math.random()*200);
 			} else if (spawnTick <= 0) {
-				spawnTick = 1200;
+				spawnTick = 600;
 			} else {
 				spawnTick--;
 			}
