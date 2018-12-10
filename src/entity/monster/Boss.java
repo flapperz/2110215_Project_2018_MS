@@ -14,7 +14,7 @@ import resource.scene.Scenes;
 public class Boss extends Monster {
 	private final int MAXWALK = 300;
 	private int walkTick = 0;
-	private int state = 0;
+	private int bossState = 0;
 	
 	public Boss(double x, double y) {
 		super(Sprites.m_boss, x, y, Const.BOSS_MAX_HP, 5000);
@@ -32,7 +32,7 @@ public class Boss extends Monster {
 
 	@Override
 	protected void subUpdate() {
-		if (state == 0) {
+		if (bossState == 0) {
 
 			if(walkTick > 200 && walkTick%20 == 1) {
 				(new MonsterBullet(x,y)).create();
@@ -47,13 +47,13 @@ public class Boss extends Monster {
 				destinationY = SharedEntity.getInstance().getPlayer().getY() - (Math.random())*100;
 			}
 			if (hp < Const.BOSS_MAX_HP/2) {
-				state = 1;
+				bossState = 1;
 				(new ExplosionParticle(x,y)).create();
 				View.getInstance().shake();
 				speedX = 6;
 				speedY = 6;
 			}
-		} else if (state == 1) {
+		} else if (bossState == 1) {
 			
 			if ((walkTick == 220 || walkTick == 290) && SharedEntity.getInstance().getMonsters().size() < 12) {
 				double r = Math.random();

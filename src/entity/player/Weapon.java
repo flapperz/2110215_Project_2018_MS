@@ -94,11 +94,6 @@ public class Weapon extends Entity{
 			fireCD--;
 		}
 	}
-	
-	@Override
-	public void onDestroy() {
-		
-	}
 
 	public int getState() {
 		return state;
@@ -114,6 +109,12 @@ public class Weapon extends Entity{
 
 	public void setAttach(Monster attach) {
 		this.attach = attach;
+	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

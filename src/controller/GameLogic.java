@@ -42,8 +42,6 @@ public class GameLogic {
 	
 	public void mainUpdate(GraphicsContext gc) {
 		bg.update();
-
-		
 		View.getInstance().update();
 		
 		monsterSpawn();

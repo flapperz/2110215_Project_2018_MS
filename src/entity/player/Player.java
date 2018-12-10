@@ -26,11 +26,13 @@ public class Player extends DamageableEntity {
 	private final double JUMP_SPEED = 20;
 	private final double GRAVITY = 1;
 	private final double MAX_SPEEDY = 20;
+	private final int MAXIMMORTALTICK = 90;
+	private int MAXJUMPCOUNT = 2;
 	
 	private boolean isImmortal = false;
-	private int immortalTick = 90;
+	private int immortalTick;
 	private boolean isGround = true;
-	private int jumpCount = 2;
+	private int jumpCount = MAXJUMPCOUNT;
 	
 	private int warpTick = 0;
 	
@@ -48,13 +50,13 @@ public class Player extends DamageableEntity {
 		}else if( y == 630) {
 			isGround = true;
 			speedY = 0;
-			jumpCount = 2;
+			jumpCount = MAXJUMPCOUNT;
 		}
 		
 		if (isImmortal && immortalTick > 0) {
 			immortalTick --;
 		} else if (isImmortal && immortalTick == 0) {
-			immortalTick = 90;
+			immortalTick = MAXIMMORTALTICK;
 			isImmortal = false;
 		}
 		
@@ -219,8 +221,11 @@ public class Player extends DamageableEntity {
 		this.isGround = isGround;
 	}
 
+	public int getHp() {
+		return hp;
+	}
+	
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
-	
 }

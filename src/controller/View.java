@@ -1,5 +1,6 @@
 package controller;
 
+import constants.Const;
 import entity.Rectangle;
 
 public class View extends Rectangle implements IUpdatable{
@@ -7,7 +8,6 @@ public class View extends Rectangle implements IUpdatable{
 	private static final View instance = new View();
 	private int speed = 30;
 	
-	private boolean shaked = false;
 	private final int MAXSHAKETICK = 20;
 	private int shakeTick = 0;
 	
@@ -18,10 +18,10 @@ public class View extends Rectangle implements IUpdatable{
 	private double ty = 0;
 	
 	private View() {
-		super(600,0,1200,900);
+		super(600, 0, Const.WINDOW_WIDTH, Const.WINDOW_HEIGHT);
 	}
 	
-	public void processShake() {
+	private void processShake() {
 		if (ct < tt) {
 			ct ++;
 		} else {
@@ -81,7 +81,6 @@ public class View extends Rectangle implements IUpdatable{
 	}
 	
 	public void reset() {
-		shaked = false;
 		shakeTick = 0;
 		
 		desX = 0;
@@ -100,14 +99,6 @@ public class View extends Rectangle implements IUpdatable{
 	
 	public static View getInstance() {
 		return instance;
-	}
-	
-	public void setShaked(boolean isShaked) {	
-		this.shaked = isShaked;
-	}
-	
-	public boolean isShaked() {
-		return shaked;
 	}
 
 	
