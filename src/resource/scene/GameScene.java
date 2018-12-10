@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -96,6 +97,8 @@ public class GameScene extends Scene {
 		Text killText = new Text("KILL : " + Integer.toString(GameLogic.getInstance().getKillCount()));
 		scoreText.setFont(new Font(100));
 		killText.setFont(new Font(100));
+		scoreText.setFill(Color.WHITE);
+		killText.setFill(Color.WHITE);
 		scoreText.setX(200);
 		scoreText.setY(600);
 		killText.setX(200);
@@ -121,6 +124,8 @@ public class GameScene extends Scene {
 		Text killText = new Text("KILL : " + Integer.toString(GameLogic.getInstance().getKillCount()));
 		scoreText.setFont(new Font(120));
 		killText.setFont(new Font(120));
+		scoreText.setFill(Color.WHITE);
+		killText.setFill(Color.WHITE);
 		scoreText.setX(200);
 		scoreText.setY(600);
 		killText.setX(200);
