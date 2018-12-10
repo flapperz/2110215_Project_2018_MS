@@ -13,25 +13,25 @@ public class WeaponProjectile extends Projectile{
 	private final int NORMAL = 0;
 	private final int ATTACH = 2;
 	
-	private int age = 120;
+	private int ageTick = 120;
 	
 	public WeaponProjectile(double x, double y) {
 		super(Sprites.p_weapon, x, y, 
 				Input.getMouseX()  + View.getInstance().getX(), 
 				Input.getMouseY()  + View.getInstance().getY(), 30.);
-				width = 30;
-				height = 30;
+				width = 180; //from 100 to 180 for presentation purpose
+				height = 180;
 	}
 	
 	@Override
 	public void update() {
 		move();
-		if(age <= 0) {
+		if(ageTick <= 0) {
 			SharedEntity.getInstance().getWeapon().setState(NORMAL);
 			SharedEntity.getInstance().getWeapon().setVisible(true);
 			this.destroy();
 		} else {
-			age -= 1;
+			ageTick -= 1;
 		}
 	}
 	

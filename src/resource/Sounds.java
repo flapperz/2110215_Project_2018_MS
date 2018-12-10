@@ -32,6 +32,10 @@ public class Sounds {
 		fx_targetLock = new AudioClip(ClassLoader.getSystemResource("sounds/targetLock.mp3").toString());
 		fx_dash = new AudioClip(ClassLoader.getSystemResource("sounds/dash.mp3").toString());
 		fx_explosion = new AudioClip(ClassLoader.getSystemResource("sounds/explosion.mp3").toString());
+		
+		fx_fire.setVolume(0.5);
+		fx_onhit.setVolume(20);
+		fx_explosion.setVolume(20);
 	}
 
 

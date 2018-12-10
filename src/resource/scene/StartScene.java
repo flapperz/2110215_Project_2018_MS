@@ -101,11 +101,6 @@ public class StartScene extends Scene {
 	
 	}
 	
-	
-	private int tt = 20, ct= 0;
-	private double ty, cy = 0;
-	
-	
 	private void playStartAnimation(GraphicsContext gc) {
 		fadeFrame = 0;
 		

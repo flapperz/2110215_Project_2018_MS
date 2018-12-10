@@ -35,7 +35,9 @@ public class Boss extends Monster {
 		if (bossState == 0) {
 
 			if(walkTick > 200 && walkTick%20 == 1) {
-				(new MonsterBullet(x,y)).create();
+				MonsterBullet mb = new MonsterBullet(x,y);
+				mb.setSpeed(18);
+				mb.create();
 			}
 			
 			if(walkTick > 0) {
@@ -55,7 +57,7 @@ public class Boss extends Monster {
 			}
 		} else if (bossState == 1) {
 			
-			if ((walkTick == 220 || walkTick == 290) && SharedEntity.getInstance().getMonsters().size() < 12) {
+			if ((walkTick == 220 || walkTick == 290 || walkTick == 240 || walkTick == 200) && SharedEntity.getInstance().getMonsters().size() < 12) {
 				double r = Math.random();
 				if(r < 0.9) {
 					(new Bowling(x,y)).create();
@@ -82,6 +84,7 @@ public class Boss extends Monster {
 	@Override
 	public void onDestroy() {
 		GameLogic.getInstance().setKillCount(GameLogic.getInstance().getKillCount() + 1);
+		((GameScene)Scenes.getGameScene()).stopMainTimeline();
 		((GameScene) Scenes.getGameScene()).playWinAnim();
 	}
 	

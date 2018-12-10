@@ -23,7 +23,7 @@ public class LoadingScene extends Scene {
 	
 
 	private int animationFrame = 0;
-	private boolean animFinished = false;//TODO for debugging
+	private boolean animFinished = false;
 	
 	public LoadingScene() {
 		super(new Pane());

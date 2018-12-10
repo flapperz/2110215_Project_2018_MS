@@ -19,7 +19,6 @@ import entity.projectile.MonsterBullet;
 import entity.projectile.Projectile;
 import gui.GUI;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 import resource.Sounds;
 import resource.scene.Scenes;
@@ -65,7 +64,7 @@ public class GameLogic {
 				} else {
 					(new GunnerBowling(sx, sy)).create();
 				}
-				spawnTick = 60 + (int)(Math.random()*300);
+				spawnTick = 60 + (int)(Math.random()*200);
 			} else if (spawnTick <= 0) {
 				spawnTick = 1200;
 			} else {

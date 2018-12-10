@@ -73,6 +73,15 @@ public class Input {
 	public static void unBindScene(Scene scene) {
 		scene.setOnKeyPressed(null);
 		scene.setOnKeyReleased(null);
+		scene.removeEventFilter(MouseEvent.ANY, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent e) {
+				mouseX = e.getX();
+				mouseY = e.getY();
+			}
+		});
+		scene.setOnMousePressed(null);
+		scene.setOnMouseReleased(null);
 	}
 	
 	public static boolean isKeyActive(KeyCode code) {
