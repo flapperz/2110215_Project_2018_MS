@@ -71,6 +71,10 @@ public class Player extends DamageableEntity {
 		}
 		else {
 			++hoverTick;
+			this.y += Math.sin(Math.PI*hoverTick/60)*20;
+			(new HoverParticle(x, y+90)).create();
+			this.y -= Math.sin(Math.PI*hoverTick/60)*20;
+
 		}
 		processWarp();
 	}
