@@ -15,6 +15,7 @@ import entity.particle.PHitParticle;
 import entity.projectile.MonsterBullet;
 import exception.CharacterOutBoundException;
 import input.Input;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import resource.Sounds;
 import resource.Sprites;
@@ -31,6 +32,7 @@ public class Player extends DamageableEntity {
 	
 	private boolean isImmortal = false;
 	private int immortalTick;
+	private int hoverTick = 0;
 	private boolean isGround = true;
 	private int jumpCount = MAXJUMPCOUNT;
 	
@@ -65,11 +67,21 @@ public class Player extends DamageableEntity {
 			processJump();
 			processGravity();
 			move();
+			hoverTick = 0;
 		}
-		
+		else {
+			++hoverTick;
+		}
 		processWarp();
 	}
-	
+
+	@Override
+	public void draw(GraphicsContext gc) {
+		// it's possible to use other function to calculate offset
+		this.y += Math.sin(Math.PI*hoverTick/60)*20;
+		super.draw(gc);
+		this.y -= Math.sin(Math.PI*hoverTick/60)*20;
+	}
 
 	public void move() {
 		x += speedX;
@@ -127,7 +139,6 @@ public class Player extends DamageableEntity {
 		if(Input.isKeyActive(KeyCode.S) && !isGround) {
 			sprite.setSprite(facing == LEFT ? Sprites.p_idleL : Sprites.p_idleR);
 			speedY = 0;
-			(new HoverParticle(x,y+90)).create();
 			return true;
 		}
 		return false;
